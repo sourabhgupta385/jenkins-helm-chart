@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Values.app_name }}-jnlp
+spec:
+  ports:
+    - name: agent
+      protocol: TCP
+      port: 50000
+      targetPort: 50000
+  selector:
+    app: {{ .Values.app_name }}
+  type: ClusterIP
+  sessionAffinity: None

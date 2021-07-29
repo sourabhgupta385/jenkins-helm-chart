@@ -1,0 +1,29 @@
+app_name: "jenkins"
+replica_count: 1
+
+image:
+  master: "quay.io/openshift/origin-jenkins"
+  slave_nodejs: "quay.io/openshift/origin-jenkins-agent-nodejs" 
+  slave_maven: "quay.io/openshift/origin-jenkins-agent-maven"
+  pull_policy: IfNotPresent
+
+openshift:
+  enable_oauth: false
+  enable_redirect_prompt: false
+  disable_administrative_monitors: false
+  k8s_trust_certs: true
+
+admin_password:     # base64 encoded using echo -n "password" | base64
+
+resources:
+  limits:
+    cpu: '1'
+    memory: 3Gi
+  requests:
+    cpu: 500m
+    memory: 2Gi
+  storage_requests: 3Gi
+
+service_account_annotation: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"jenkins"}}'
+
+app_host: ""

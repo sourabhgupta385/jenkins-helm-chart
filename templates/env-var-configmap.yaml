@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.app_name }}-env-vars
+data:
+  OPENSHIFT_ENABLE_OAUTH: {{ .Values.openshift.enable_oauth | quote }}
+  OPENSHIFT_ENABLE_REDIRECT_PROMPT: {{ .Values.openshift.enable_redirect_prompt | quote }}
+  DISABLE_ADMINISTRATIVE_MONITORS: {{ .Values.openshift.disable_administrative_monitors | quote }}
+  KUBERNETES_TRUST_CERTIFICATES: {{ .Values.openshift.k8s_trust_certs | quote }}
+  JENKINS_SERVICE_NAME: {{ .Values.app_name }}
+  NODEJS_SLAVE_IMAGE: {{ .Values.image.slave_nodejs }}
+  MAVEN_SLAVE_IMAGE: {{ .Values.image.slave_maven }}
+  JNLP_SERVICE_NAME: {{ .Values.app_name }}-jnlp
+  ENABLE_FATAL_ERROR_LOG_FILE: 'false'
+  TZ: Asia/Kolkata
+  
